@@ -36,7 +36,7 @@ credit_handler = CommandHandler('credits',credit)
 dispatcher.add_handler(start_handler)
 dispatcher.add_handler(ramdon_cat_handler)
 dispatcher.add_handler(ramdon_dog_handler)
-dispatcher.add_handle(credit_handler)
+dispatcher.add_handler(credit_handler)
 
 updater.start_polling()
 updater.idle()
