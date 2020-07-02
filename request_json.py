@@ -15,10 +15,3 @@ def get_ramdon_dog():
         obj= response.json()
         return obj['message'] 
 
-"""
-for i in range(10):
-    if i%2 == 0:
-        print(get_ramdon_cat())
-    else:
-        print(get_ramdon_dog())
-"""
