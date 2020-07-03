@@ -1,3 +1,4 @@
+import files
 import random
 import logging
 from telegram.ext import Updater
@@ -13,8 +14,8 @@ logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s
 config_parser = ConfigParser()
 config_parser.read('config.ini')
 TOKEN = config_parser['Bot']['Token']
-updater = Updater(token=TOKEN, use_context=True)
 
+updater = Updater(token=TOKEN, use_context=True)
 dispatcher = updater.dispatcher
 
 def start(update, context):
@@ -35,23 +36,18 @@ def random_dog(update,context):
     context.bot.send_photo(chat_id = update.effective_chat.id, photo =  url)
 
 def get_random_sticker(update,context):
-    with open('./stickers/random_stickers_id.txt','r') as file:
-        lines = file.readlines()
-        sticker_id = random.choice(lines).replace('\n','')
-        context.bot.send_sticker(chat_id = update.effective_chat.id, sticker = sticker_id)
-
+    sticker_id = files.get_random_line('./stickers/random_stickers_id.txt')
+    context.bot.send_sticker(chat_id = update.effective_chat.id, sticker = sticker_id)
+    
 def add_sticker(update,context):
     sticker_id = ''.join([update.message.sticker.file_id,'\n'])
-    with open('./stickers/random_stickers_id.txt','a') as file:
-        file.write(sticker_id)
-        context.bot.send_message(chat_id = update.effective_chat.id, text = sticker_id)
+    files.write_file('./stickers/random_stickers_id.txt',sticker_id)
+    context.bot.send_message(chat_id = update.effective_chat.id, text = "*Capy have saved your sticker*")
 
 def unknow(update,context):
-    with open('./stickers/capy_stickers_id.txt','r') as file:
-        lines = file.readlines()
-        sticker_id = random.choice(lines).replace('\n','')
-        context.bot.send_sticker(chat_id = update.effective_chat.id, sticker = sticker_id)
-    
+    sticker_id = files.get_random_line('./stickers/capy_stickers_id.txt')
+    context.bot.send_sticker(chat_id = update.effective_chat.id, sticker = sticker_id)
+   
 start_handler = CommandHandler('start', start)
 random_cat_handler = CommandHandler('cat',random_cat)
 random_dog_handler = CommandHandler('dog',random_dog)
