@@ -6,10 +6,13 @@ from telegram.ext import Filters
 from telegram.ext import MessageHandler
 from request_json import get_random_cat
 from request_json import get_random_dog
+from configparser import ConfigParser
 
 logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',level=logging.DEBUG)
 
-TOKEN = '935538322:AAGJE2zDh2UeTCI2cXC6jBy-0yjdR0DDG34'
+config_parser = ConfigParser()
+config_parser.read('config.ini')
+TOKEN = config_parser['Bot']['Token']
 updater = Updater(token=TOKEN, use_context=True)
 
 dispatcher = updater.dispatcher
