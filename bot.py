@@ -8,6 +8,7 @@ from telegram.ext import MessageHandler
 from configparser import ConfigParser
 from request_json import get_random_cat
 from request_json import get_random_dog
+from ig_scraper import get_random_ig_images
 
 
 logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',level=logging.DEBUG)
@@ -16,6 +17,8 @@ config_parser = ConfigParser()
 config_parser.read('config.ini')
 TOKEN = config_parser['Bot']['Token']
 USERNAME = config_parser['Credits']['username']
+IG_USERNAME = config_parser['Credentials']['username']
+IG_PASSWORD = config_parser['Credentials']['password']
 
 updater = Updater(token=TOKEN, use_context=True)
 dispatcher = updater.dispatcher
@@ -53,8 +56,21 @@ def add_sticker(update,context):
     context.bot.send_message(chat_id = update.effective_chat.id, text = "*Capy have saved your sticker*")
 
 
+def get_random_media(update,context):
+    context.bot.send_message(chat_id = update.effective_chat.id, text = "*Capy is searching in ig some images...*")
+    parameters = update.message.text.split()
+    tag = parameters[1]
+    number_images = int(parameters[2])
+    
+    links = get_random_ig_images(IG_USERNAME,IG_PASSWORD,tag,number_images)
+    for link in links:
+        context.bot.send_photo(chat_id = update.effective_chat.id, photo = link)
+
+    context.bot.send_message(chat_id = update.effective_chat.id, text = "*Capy have finished*")
+
+
 def unknow(update,context):
-    sticker_id = files.get_random_line('./stickers/capy_stickers_id.txt')
+    sticker_id = files.get_random_line('./stickers/random_stickers_id.txt')
     context.bot.send_sticker(chat_id = update.effective_chat.id, sticker = sticker_id)
 
 
@@ -63,6 +79,7 @@ def start_handlers ():
     random_cat_handler = CommandHandler('cat',random_cat)
     random_dog_handler = CommandHandler('dog',random_dog)
     random_sticker_handler = CommandHandler('sticker',get_random_sticker)
+    random_media_handler = CommandHandler('media',get_random_media)
     credit_handler = CommandHandler('credits',credit)
     add_sticker_handler = MessageHandler(Filters.sticker,add_sticker)
     unknow_handler = MessageHandler(Filters.text,unknow)
@@ -70,6 +87,7 @@ def start_handlers ():
     dispatcher.add_handler(random_cat_handler)
     dispatcher.add_handler(random_dog_handler)
     dispatcher.add_handler(random_sticker_handler)
+    dispatcher.add_handler(random_media_handler)
     dispatcher.add_handler(credit_handler)
     dispatcher.add_handler(add_sticker_handler)
     dispatcher.add_handler(unknow_handler)

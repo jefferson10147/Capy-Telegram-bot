@@ -1,2 +1,4 @@
 config.ini
 .stickers/random_stickers_id.txt
+__pycache__
+.igcache/
