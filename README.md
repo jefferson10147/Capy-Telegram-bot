@@ -7,7 +7,7 @@ Telegram bot using python.
   [Dog's API](https://dog.ceo/)
   [Cat's API](https://thecatapi.com/)
 
-*This bot have an instagram scraper using **igramscraper** which searchs pics by tag name, to use the command **/media tagname nImages**
+*This bot have an instagram scraper using **igramscraper** which searchs pics by tag name, to use the command just send this **/media tagname nImages**
   You can find documentation about this library [here.](https://pypi.org/project/igramscraper/)
 
 *Finally this bot handles some messages you send like stickers o simply text.
