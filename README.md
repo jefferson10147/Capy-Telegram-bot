@@ -12,11 +12,9 @@ Telegram bot using python.
 
 *Finally this bot handles some messages you send like stickers o simply text.
 
-## How to run this bot on your machine:
-**On linux**
-*You need to install some libraries.
+## How to run this bot on your machine (On linux):
 
-
+*You need to install some libraries:
 ```bash
  $ pip install python-telegram-bot
  $ pip install igramscraper
@@ -28,11 +26,8 @@ Token = YOUR_BOT_API_TOKEN
 [Credentials]
 username = YOUR_IG_USERNAME   
 password = YOUR_IG_PASSWORD
-
 ```
-
-*Then just run:
-
+*Then just run on your terminal:
 ```bash
     $ python3 bot.py
  ```
