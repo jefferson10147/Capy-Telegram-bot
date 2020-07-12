@@ -10,19 +10,28 @@ Telegram bot using python.
 *This bot have an instagram scraper using **igramscraper** which searchs pics by tag name, to use the command **/media tagname nImages**
   You can find documentation about this library [here.](https://pypi.org/project/igramscraper/)
 
-*Finally this bot handles some message you send like stickers o simply text.
+*Finally this bot handles some messages you send like stickers o simply text.
 
 ## How to run this bot on your machine:
 **On linux**
-You need to install some libraries.
+*You need to install some libraries.
 
 
 ```bash
- $ pip install python-telegram-bot --upgrade
+ $ pip install python-telegram-bot
  $ pip install igramscraper
 ```
-       
-Then just run:
+*Make a config.ini file where you have to put some data like:
+```
+[Bot]
+Token = YOUR_BOT_API_TOKEN
+[Credentials]
+username = YOUR_IG_USERNAME   
+password = YOUR_IG_PASSWORD
+
+```
+
+*Then just run:
 
 ```bash
     $ python3 bot.py
