@@ -1,5 +1,4 @@
 from igramscraper.instagram import Instagram
-from configparser import ConfigParser
 
 
 def start_ig(username,password):

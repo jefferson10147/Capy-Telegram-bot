@@ -52,7 +52,7 @@ def get_random_sticker(update,context):
 
 def add_sticker(update,context):
     sticker_id = ''.join([update.message.sticker.file_id,'\n'])
-    files.write_file('./stickers/capy_stickers_id.txt',sticker_id)
+    files.write_file('./stickers/random_stickers_id.txt',sticker_id)
     context.bot.send_message(chat_id = update.effective_chat.id, text = "*Capy have saved your sticker*")
 
 
@@ -70,7 +70,7 @@ def get_random_media(update,context):
 
 
 def unknow(update,context):
-    sticker_id = files.get_random_line('./stickers/random_stickers_id.txt')
+    sticker_id = files.get_random_line('./stickers/capy_stickers_id.txt')
     context.bot.send_sticker(chat_id = update.effective_chat.id, sticker = sticker_id)
 
 
